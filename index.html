@@ -1,124 +1,454 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos | Galleta Chepa - Panadería Donde Sharon</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        bakery: {
-                            50: '#fdf8f6',
-                            100: '#fbeee6',
-                            500: '#d94f2b',
-                            600: '#b83b1a',
-                            700: '#962e12',
-                            900: '#691d09',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galleta Chepa | Panadería Donde Sharon</title>
+<meta name="description" content="Galleta Chepa de 400 g de la Panadería Donde Sharon, El Carmen de Bolívar. Haz tu pedido por WhatsApp con doña Ruth: 322 7249957.">
+<meta name="theme-color" content="#8f2d12">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Galleta Chepa | Panadería Donde Sharon">
+<meta property="og:description" content="Paquete de 400 g. Pide por WhatsApp con doña Ruth: 322 7249957.">
+<meta property="og:image" content="https://haroldco45.github.io/panaderia-donde-sharon/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --crema:#fbf3e7; --papel:#fffaf2; --horno:#8f2d12; --brasa:#d94f2b; --miel:#e9a23b;
+  --cafe:#2e1a10; --tinta:#5b4636; --linea:#ead9c2; --wa:#128c4a; --wa2:#0d6e39;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif; --sans:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--crema);color:var(--cafe);line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:84px}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* Barra superior */
+.top{position:sticky;top:0;z-index:30;background:rgba(251,243,231,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:12px}
+.marca{font-family:var(--serif);font-weight:700;font-size:1.05rem;letter-spacing:.01em;color:var(--horno);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.marca small{display:block;font-family:var(--sans);font-weight:500;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta)}
+.idioma{display:flex;border:1px solid var(--linea);border-radius:999px;overflow:hidden;background:var(--papel);flex-shrink:0}
+.idioma button{font:600 .78rem var(--sans);padding:7px 13px;border:0;background:transparent;color:var(--tinta);cursor:pointer}
+.idioma button[aria-pressed="true"]{background:var(--horno);color:#fff}
+
+/* Portada */
+.hero{background:radial-gradient(120% 90% at 85% 10%,#b8431f 0%,var(--horno) 45%,#5e1c0a 100%);color:#fff;overflow:hidden;position:relative}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.035) 0 2px,transparent 2px 14px);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:56px;padding-bottom:64px}
+.origen{font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#f6cfa0}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(3.2rem,11vw,6.6rem);line-height:.9;letter-spacing:-.025em;margin:14px 0 18px}
+.hero h1 span{display:block;color:var(--miel);font-style:italic;font-weight:700}
+.hero p.bajada{font-size:1.08rem;max-width:34ch;color:#fbe6d2}
+.precio{display:flex;align-items:baseline;gap:12px;margin:26px 0 24px;flex-wrap:wrap}
+.precio b{font-family:var(--serif);font-size:2.6rem;font-weight:700;line-height:1}
+.precio i{font-style:normal;font-size:.9rem;color:#f6cfa0}
+.acciones{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:700 1rem var(--sans);padding:15px 24px;border-radius:14px;border:0;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:active{transform:scale(.97)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+.btn-wa:hover{background:var(--wa2)}
+.btn-linea{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+.btn-linea:hover{background:rgba(255,255,255,.12)}
+
+/* Vitrina: foto real o etiqueta */
+.vitrina{position:relative;aspect-ratio:4/5;max-width:400px;width:100%;margin-left:auto;animation:flota 6s ease-in-out infinite}
+@keyframes flota{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(-1deg)}}
+.vitrina img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.65);display:none}
+.vitrina.con-foto img{display:block}
+.vitrina.con-foto .etiqueta{display:none}
+.etiqueta{position:absolute;inset:0;background:var(--papel);color:var(--cafe);border-radius:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.65);padding:14px;display:flex}
+.etiqueta .marco{flex:1;border:2px solid var(--horno);border-radius:12px;outline:1px solid var(--horno);outline-offset:-7px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:30px 18px}
+.etiqueta .casa{font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--horno)}
+.etiqueta .nombre{font-family:var(--serif);font-weight:900;font-size:clamp(2.6rem,8vw,3.6rem);line-height:.92;color:var(--horno)}
+.etiqueta .nombre em{display:block;font-weight:500;font-size:.5em;color:var(--tinta);margin-bottom:6px}
+.etiqueta .peso{font-family:var(--serif);font-weight:700;font-size:1.5rem;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:8px 26px}
+.etiqueta .pie{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta)}
+
+/* Cinta */
+.cinta{background:var(--cafe);color:#f6cfa0;overflow:hidden;white-space:nowrap;font:600 .8rem var(--sans);letter-spacing:.2em;text-transform:uppercase;padding:11px 0}
+.cinta div{display:inline-block;animation:corre 26s linear infinite}
+.cinta span{margin:0 22px}
+.cinta span::after{content:"/";margin-left:44px;color:var(--brasa)}
+@keyframes corre{to{transform:translateX(-50%)}}
+
+/* Secciones */
+section{padding:64px 0}
+.rotulo{font-size:.74rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--brasa)}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.05;letter-spacing:-.015em;margin:8px 0 14px}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.dos p{color:var(--tinta);font-size:1.05rem;max-width:46ch}
+.ingredientes{list-style:none;border-top:1px solid var(--linea)}
+.ingredientes li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--linea);font-family:var(--serif);font-size:1.35rem;font-weight:500}
+.ingredientes li small{font-family:var(--sans);font-size:.8rem;color:var(--tinta);font-weight:500;text-align:right}
+
+/* Pedido */
+#pedido{background:var(--papel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.pedido{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.caja{background:#fff;border:1px solid var(--linea);border-radius:20px;padding:26px}
+.caja h3{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:4px}
+.caja .nota{font-size:.88rem;color:var(--tinta);margin-bottom:18px}
+.contador{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:6px 0 18px}
+.contador button{width:58px;height:58px;border-radius:16px;border:1.5px solid var(--linea);background:var(--crema);font:700 1.7rem/1 var(--serif);color:var(--horno);cursor:pointer;transition:background .15s,transform .1s}
+.contador button:hover{background:#f6e3cb}
+.contador button:active{transform:scale(.93)}
+.contador input{flex:1;min-width:0;text-align:center;font:900 3rem/1 var(--serif);color:var(--cafe);border:0;background:transparent;-moz-appearance:textfield}
+.contador input::-webkit-outer-spin-button,.contador input::-webkit-inner-spin-button{-webkit-appearance:none}
+.contador input:focus{outline:2px solid var(--brasa);border-radius:10px}
+.rapidos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rapidos button{padding:11px 4px;border-radius:12px;border:1.5px solid var(--linea);background:#fff;font:600 .9rem var(--sans);color:var(--cafe);cursor:pointer;transition:all .15s}
+.rapidos button:hover,.rapidos button.activo{border-color:var(--brasa);background:#fdeee6;color:var(--horno)}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px dashed var(--linea);margin-top:22px;padding-top:18px}
+.total span{font-weight:600;color:var(--tinta)}
+.total b{font-family:var(--serif);font-size:2.2rem;font-weight:900;color:var(--horno);display:inline-block}
+.total b.salta{animation:salta .3s}
+@keyframes salta{40%{transform:scale(1.12)}}
+.detalle{font-size:.85rem;color:var(--tinta);text-align:right}
+label{display:block;font-size:.8rem;font-weight:600;color:var(--tinta);margin:14px 0 5px}
+label:first-of-type{margin-top:0}
+input[type=text],input[type=tel],textarea{width:100%;font:500 1rem var(--sans);color:var(--cafe);padding:13px 14px;border:1.5px solid var(--linea);border-radius:12px;background:var(--crema);transition:border .15s,background .15s}
+textarea{resize:vertical;min-height:70px}
+input:focus,textarea:focus{outline:0;border-color:var(--brasa);background:#fff}
+.falta{border-color:#c0261b!important;background:#fff3f1!important}
+.aviso{min-height:1.3em;font-size:.88rem;font-weight:600;color:#c0261b;margin:12px 0 10px}
+.caja .btn{width:100%}
+
+/* Ruth */
+.ruth{display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center;background:var(--cafe);color:#fff;border-radius:24px;padding:32px}
+.ruth .inicial{width:84px;height:84px;border-radius:50%;background:var(--miel);color:var(--cafe);font:900 2.6rem/84px var(--serif);text-align:center}
+.ruth .rotulo{color:var(--miel)}
+.ruth h2{margin:4px 0 2px;font-size:2rem}
+.ruth .tel{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:#f6cfa0;text-decoration:none;letter-spacing:.02em}
+.ruth .acciones{flex-direction:column}
+
+footer{padding:34px 0 20px;font-size:.84rem;color:var(--tinta);text-align:center}
+footer b{color:var(--cafe)}
+
+/* Barra fija inferior */
+.fija{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--linea);box-shadow:0 -10px 30px -18px rgba(46,26,16,.5);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.fija .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0}
+.fija small{display:block;font-size:.74rem;color:var(--tinta);font-weight:600}
+.fija b{font-family:var(--serif);font-size:1.45rem;font-weight:900;color:var(--horno);line-height:1.1}
+.fija .btn{padding:13px 20px;font-size:.95rem}
+
+.aparece{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.aparece.ya{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .hero .wrap,.dos,.pedido{grid-template-columns:1fr}
+  .hero .wrap{padding-top:38px;padding-bottom:48px;gap:34px}
+  .vitrina{margin:0 auto;max-width:320px}
+  .ruth{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .ruth .acciones{flex-direction:row;justify-content:center}
+  section{padding:48px 0}
+  .dos{gap:28px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.aparece{opacity:1;transform:none}}
+</style>
 </head>
-<body class="bg-bakery-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- Notificación emergente personalizada -->
-    <div id="custom-toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-transform duration-300 ease-in-out bg-white border-l-4 border-bakery-500 shadow-xl rounded-lg p-4 flex items-center space-x-3 max-w-sm">
-        <div class="text-bakery-500 text-xl" id="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
-        <div>
-            <h4 class="font-bold text-sm text-gray-900" id="toast-title">Aviso</h4>
-            <p class="text-xs text-gray-600" id="toast-msg">Mensaje aquí</p>
-        </div>
+<header class="top">
+  <div class="wrap">
+    <div class="marca">Panadería Donde Sharon<small>El Carmen de Bolívar</small></div>
+    <div class="idioma" role="group" aria-label="Idioma">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
     </div>
+  </div>
+</header>
 
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-bakery-700 via-bakery-600 to-bakery-500 text-white shadow-lg sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div class="flex items-center space-x-3">
-                <div class="bg-white text-bakery-600 p-2.5 rounded-full shadow-md">
-                    <i class="fa-solid fa-cookie-bite text-2xl"></i>
-                </div>
-                <div>
-                    <h1 class="font-serif text-2xl sm:text-3xl font-bold tracking-wide">Panadería Donde Sharon</h1>
-                    <p class="text-xs sm:text-sm text-bakery-100 font-light flex items-center gap-1.5 mt-0.5">
-                        <i class="fa-solid fa-store"></i> Repositorio: panaderia-dondes-sharon
-                    </p>
-                </div>
-            </div>
-            
-            <!-- Vendedora Contact Info Badge -->
-            <div class="bg-black/20 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 flex items-center gap-3 shadow-inner">
-                <div class="relative">
-                    <div class="w-10 h-10 rounded-full bg-white text-bakery-600 font-bold flex items-center justify-center text-lg shadow">
-                        R
-                    </div>
-                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-bakery-700 rounded-full"></span>
-                </div>
-                <div>
-                    <span class="text-xs text-bakery-100 block uppercase tracking-wider font-medium">Asesor Comercial</span>
-                    <span class="font-semibold text-sm sm:text-base flex items-center gap-1.5">
-                        Ruth <a href="https://wa.me/573227249957" target="_blank" class="text-green-300 hover:text-white transition-colors text-xs bg-green-600/60 px-2 py-0.5 rounded-full"><i class="fa-brands fa-whatsapp"></i> 322 7249957</a>
-                    </span>
-                </div>
-            </div>
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <div class="origen" data-i18n="origen">Hecha en El Carmen de Bolívar</div>
+      <h1><span data-i18n="galleta">Galleta</span>Chepa</h1>
+      <p class="bajada" data-i18n="bajada">La galleta de queso de la Panadería Donde Sharon, en paquete de 400 gramos. Pídela directo con doña Ruth.</p>
+      <div class="precio"><b>$7.000</b><i data-i18n="porPaquete">por paquete de 400 g</i></div>
+      <div class="acciones">
+        <a class="btn btn-wa" href="#pedido" data-i18n="hacerPedido">Hacer mi pedido</a>
+        <a class="btn btn-linea" href="tel:+573227249957" data-i18n="llamar">Llamar a doña Ruth</a>
+      </div>
+    </div>
+    <div class="vitrina" id="vitrina">
+      <img src="fotos/galleta-chepa.jpg" alt="Paquete de Galleta Chepa de 400 g" id="foto">
+      <div class="etiqueta" aria-hidden="true">
+        <div class="marco">
+          <div class="casa">Panadería Donde Sharon</div>
+          <div class="nombre"><em data-i18n="galleta">Galleta</em>Chepa</div>
+          <div class="peso">400 g</div>
+          <div class="pie">El Carmen de Bolívar</div>
         </div>
-    </header>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- Main Content Grid -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-grow w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Catálogo de Productos (2 columnas en LG) -->
-        <div class="lg:col-span-2 space-y-6">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-bakery-100">
-                <h2 class="text-xl font-bold font-serif text-gray-900">Catálogo de Productos</h2>
-                <p class="text-xs text-gray-500">Producto tradicional artesanal disponible para pedidos</p>
-            </div>
+<div class="cinta" aria-hidden="true"><div id="cinta"></div></div>
 
-            <!-- Grid de Tarjetas de Productos -->
-            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <!-- Se inyecta dinámicamente vía JavaScript -->
-            </div>
+<section>
+  <div class="wrap dos">
+    <div class="aparece">
+      <div class="rotulo" data-i18n="rotuloProducto">El producto</div>
+      <h2 data-i18n="tituloProducto">Cuatro ingredientes y el horno de siempre</h2>
+      <p data-i18n="textoProducto">En El Carmen de Bolívar la galleta de queso es tradición de casa. La Galleta Chepa de Donde Sharon se hace con lo justo, sin enredos, y llega en paquete de 400 gramos, lista para el tinto, la lonchera o la vitrina de tu tienda.</p>
+    </div>
+    <ul class="ingredientes aparece">
+      <li><span data-i18n="ing1">Harina de trigo</span><small data-i18n="ing1b">fortificada</small></li>
+      <li><span data-i18n="ing2">Queso</span><small data-i18n="ing2b">leche en polvo</small></li>
+      <li><span data-i18n="ing3">Azúcar</span><small></small></li>
+      <li><span data-i18n="ing4">Agua</span><small></small></li>
+    </ul>
+  </div>
+</section>
+
+<section id="pedido">
+  <div class="wrap">
+    <div class="rotulo" data-i18n="rotuloPedido">Tu pedido</div>
+    <h2 data-i18n="tituloPedido">¿Cuántos paquetes te llevo?</h2>
+    <div class="pedido">
+      <div class="caja aparece">
+        <h3 data-i18n="cantidad">Cantidad</h3>
+        <p class="nota" data-i18n="notaCantidad">Paquetes de Galleta Chepa de 400 g</p>
+        <div class="contador">
+          <button type="button" id="menos" aria-label="Quitar un paquete">&minus;</button>
+          <input type="number" id="cant" min="1" max="999" value="1" inputmode="numeric" aria-label="Cantidad de paquetes">
+          <button type="button" id="mas" aria-label="Agregar un paquete">+</button>
         </div>
+        <div class="rapidos" id="rapidos">
+          <button type="button" data-n="3">3</button>
+          <button type="button" data-n="6">6</button>
+          <button type="button" data-n="12">12</button>
+          <button type="button" data-n="24">24</button>
+        </div>
+        <div class="total"><span data-i18n="total">Total</span><b id="total">$7.000</b></div>
+        <div class="detalle" id="detalle"></div>
+      </div>
 
-        <!-- Panel de Carrito / Detalle de Pedido -->
-        <div class="lg:col-span-1">
-            <div class="bg-white rounded-2xl shadow-lg border border-bakery-100 sticky top-24 overflow-hidden flex flex-col">
-                <!-- Cabecera del Carrito -->
-                <div class="bg-bakery-500 text-white p-4 flex justify-between items-center">
-                    <h3 class="font-serif font-bold text-lg flex items-center gap-2">
-                        <i class="fa-solid fa-cart-shopping"></i> Tu Pedido Actual
-                    </h3>
-                    <span id="cart-counter" class="bg-white text-bakery-600 text-xs font-bold px-2.5 py-1 rounded-full shadow">0 paquetes</span>
-                </div>
+      <div class="caja aparece">
+        <h3 data-i18n="tusDatos">Tus datos</h3>
+        <p class="nota" data-i18n="notaDatos">Para que doña Ruth sepa a quién y dónde entregar.</p>
+        <label for="nombre" data-i18n="lNombre">Nombre o negocio</label>
+        <input type="text" id="nombre" autocomplete="name" data-ph="phNombre" placeholder="Tienda El Progreso / Juan Pérez">
+        <label for="direccion" data-i18n="lDireccion">Dirección o barrio</label>
+        <input type="text" id="direccion" autocomplete="street-address" data-ph="phDireccion" placeholder="Calle 20 # 15-30">
+        <label for="telefono" data-i18n="lTelefono">Teléfono</label>
+        <input type="tel" id="telefono" autocomplete="tel" inputmode="tel" placeholder="300 123 4567">
+        <label for="notas" data-i18n="lNotas">Observaciones (opcional)</label>
+        <textarea id="notas" data-ph="phNotas" placeholder="Entregar en la mañana, llevo cambio de 50 mil"></textarea>
+        <div class="aviso" id="aviso" role="alert"></div>
+        <button type="button" class="btn btn-wa" id="enviar" data-i18n="enviar">Enviar pedido por WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <!-- Lista de Ítems en el Carrito -->
-                <div id="cart-items" class="p-4 max-h-64 overflow-y-auto divide-y divide-gray-100 flex-grow">
-                    <div class="text-center py-8 text-gray-400">
-                        <i class="fa-solid fa-basket-shopping text-3xl mb-2 block"></i>
-                        <p class="text-sm">Tu carrito está vacío.<br>Agrega paquetes de Galleta Chepa.</p>
-                    </div>
-                </div>
+<section>
+  <div class="wrap">
+    <div class="ruth aparece">
+      <div class="inicial">R</div>
+      <div>
+        <div class="rotulo" data-i18n="rotuloRuth">Quien te atiende</div>
+        <h2>Doña Ruth</h2>
+        <a class="tel" href="tel:+573227249957">322 724 9957</a>
+      </div>
+      <div class="acciones">
+        <a class="btn btn-wa" id="waDirecto" target="_blank" rel="noopener" href="https://wa.me/573227249957" data-i18n="escribir">Escribir por WhatsApp</a>
+        <a class="btn btn-linea" href="tel:+573227249957" data-i18n="llamarCorto">Llamar</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <!-- Formulario de Datos del Cliente -->
-                <div class="p-4 bg-bakery-50 border-t border-gray-100 space-y-3">
-                    <h4 class="font-semibold text-xs uppercase tracking-wider text-gray-700 flex items-center gap-1.5">
-                        <i class="fa-solid fa-user-pen text-bakery-500"></i> Datos de Envío / Negocio
-                    </h4>
-                    
-                    <div>
-                        <label class="block text-xs font-medium text-gray-600 mb-1">Nombre del Negocio o Cliente *</label>
-                        <input type="text" id="client-name" placeholder="Ej. Tienda El Progreso / Juan Pérez" 
-                               class="w-full px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2
+<footer>
+  <div class="wrap">
+    <p><b>Panadería Donde Sharon</b> &middot; El Carmen de Bolívar</p>
+    <p data-i18n="derechos">Derechos de autor reservados &copy; Vibras Positivas HM</p>
+  </div>
+</footer>
+
+<div class="fija">
+  <div class="wrap">
+    <div><small id="fijaCant"></small><b id="fijaTotal">$7.000</b></div>
+    <button type="button" class="btn btn-wa" id="fijaBtn" data-i18n="pedir">Pedir por WhatsApp</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var PRECIO = 7000;
+  var WHATSAPP = '573227249957';   // Celular de doña Ruth: 322 724 9957
+  var lang = 'es';
+
+  var T = {
+    es:{
+      origen:'Hecha en El Carmen de Bolívar', galleta:'Galleta',
+      bajada:'La galleta de queso de la Panadería Donde Sharon, en paquete de 400 gramos. Pídela directo con doña Ruth.',
+      porPaquete:'por paquete de 400 g', hacerPedido:'Hacer mi pedido', llamar:'Llamar a doña Ruth',
+      rotuloProducto:'El producto', tituloProducto:'Cuatro ingredientes y el horno de siempre',
+      textoProducto:'En El Carmen de Bolívar la galleta de queso es tradición de casa. La Galleta Chepa de Donde Sharon se hace con lo justo, sin enredos, y llega en paquete de 400 gramos, lista para el tinto, la lonchera o la vitrina de tu tienda.',
+      ing1:'Harina de trigo', ing1b:'fortificada', ing2:'Queso', ing2b:'leche en polvo', ing3:'Azúcar', ing4:'Agua',
+      rotuloPedido:'Tu pedido', tituloPedido:'¿Cuántos paquetes te llevo?',
+      cantidad:'Cantidad', notaCantidad:'Paquetes de Galleta Chepa de 400 g', total:'Total',
+      tusDatos:'Tus datos', notaDatos:'Para que doña Ruth sepa a quién y dónde entregar.',
+      lNombre:'Nombre o negocio', lDireccion:'Dirección o barrio', lTelefono:'Teléfono', lNotas:'Observaciones (opcional)',
+      phNombre:'Tienda El Progreso / Juan Pérez', phDireccion:'Calle 20 # 15-30', phNotas:'Entregar en la mañana, llevo cambio de 50 mil',
+      enviar:'Enviar pedido por WhatsApp', rotuloRuth:'Quien te atiende', escribir:'Escribir por WhatsApp', llamarCorto:'Llamar',
+      derechos:'Derechos de autor reservados © Vibras Positivas HM', pedir:'Pedir por WhatsApp',
+      paquete:'paquete', paquetes:'paquetes', cu:'c/u', kilos:'de galleta',
+      faltan:'Completa nombre, dirección y teléfono para enviar el pedido.',
+      cinta:['Galleta Chepa','400 gramos','Panadería Donde Sharon','El Carmen de Bolívar','Pedidos con doña Ruth','322 724 9957'],
+      hola:'Hola doña Ruth, quiero pedir Galleta Chepa.'
+    },
+    en:{
+      origen:'Made in El Carmen de Bolívar', galleta:'Galleta',
+      bajada:'The cheese cookie from Panadería Donde Sharon, in a 400-gram pack. Order it straight from Doña Ruth.',
+      porPaquete:'per 400 g pack', hacerPedido:'Place my order', llamar:'Call Doña Ruth',
+      rotuloProducto:'The product', tituloProducto:'Four ingredients and the same old oven',
+      textoProducto:'In El Carmen de Bolívar the cheese cookie is a household tradition. Galleta Chepa from Donde Sharon is made with just what it needs and comes in a 400-gram pack, ready for coffee, the lunchbox or your shop counter.',
+      ing1:'Wheat flour', ing1b:'fortified', ing2:'Cheese', ing2b:'powdered milk', ing3:'Sugar', ing4:'Water',
+      rotuloPedido:'Your order', tituloPedido:'How many packs shall I bring?',
+      cantidad:'Quantity', notaCantidad:'400 g packs of Galleta Chepa', total:'Total',
+      tusDatos:'Your details', notaDatos:'So Doña Ruth knows who and where to deliver.',
+      lNombre:'Name or business', lDireccion:'Address or neighborhood', lTelefono:'Phone', lNotas:'Notes (optional)',
+      phNombre:'El Progreso store / Juan Pérez', phDireccion:'Calle 20 # 15-30', phNotas:'Deliver in the morning',
+      enviar:'Send order on WhatsApp', rotuloRuth:'Who takes your order', escribir:'Message on WhatsApp', llamarCorto:'Call',
+      derechos:'All rights reserved © Vibras Positivas HM', pedir:'Order on WhatsApp',
+      paquete:'pack', paquetes:'packs', cu:'each', kilos:'of cookies',
+      faltan:'Fill in name, address and phone to send the order.',
+      cinta:['Galleta Chepa','400 grams','Panadería Donde Sharon','El Carmen de Bolívar','Orders with Doña Ruth','322 724 9957'],
+      hola:'Hola doña Ruth, quiero pedir Galleta Chepa.'
+    }
+  };
+
+  function $(id){return document.getElementById(id);}
+  function pesos(n){return '$' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+  function guardar(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function leer(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}}
+
+  var cant = $('cant'), campos = ['nombre','direccion','telefono','notas'];
+
+  function cantidad(){
+    var n = parseInt(cant.value,10);
+    if(isNaN(n)||n<1) n = 1;
+    if(n>999) n = 999;
+    return n;
+  }
+
+  function pintar(salta){
+    var n = cantidad(), t = T[lang], total = n*PRECIO;
+    var kg = (n*400/1000);
+    var kgTxt = (kg%1===0 ? kg : kg.toFixed(1).replace('.', lang==='es'?',':'.')) + ' kg ' + t.kilos;
+    $('total').textContent = pesos(total);
+    $('fijaTotal').textContent = pesos(total);
+    $('detalle').textContent = n + ' × ' + pesos(PRECIO) + ' ' + t.cu + ' · ' + kgTxt;
+    $('fijaCant').textContent = n + ' ' + (n===1?t.paquete:t.paquetes);
+    var bs = $('rapidos').children;
+    for(var i=0;i<bs.length;i++) bs[i].className = (parseInt(bs[i].dataset.n,10)===n)?'activo':'';
+    if(salta){ var b=$('total'); b.classList.remove('salta'); void b.offsetWidth; b.classList.add('salta'); }
+  }
+
+  function poner(n){ cant.value = Math.max(1,Math.min(999,n)); pintar(true); }
+
+  $('menos').onclick = function(){ poner(cantidad()-1); };
+  $('mas').onclick = function(){ poner(cantidad()+1); };
+  cant.oninput = function(){ pintar(true); };
+  cant.onblur = function(){ cant.value = cantidad(); };
+  $('rapidos').onclick = function(e){ var n = e.target.dataset && e.target.dataset.n; if(n) poner(parseInt(n,10)); };
+
+  function idioma(l){
+    lang = l; var t = T[l];
+    document.documentElement.lang = l;
+    var els = document.querySelectorAll('[data-i18n]');
+    for(var i=0;i<els.length;i++){ var k = els[i].dataset.i18n; if(t[k]!==undefined) els[i].textContent = t[k]; }
+    var phs = document.querySelectorAll('[data-ph]');
+    for(var j=0;j<phs.length;j++) phs[j].placeholder = t[phs[j].dataset.ph];
+    var bs = document.querySelectorAll('.idioma button');
+    for(var b=0;b<bs.length;b++) bs[b].setAttribute('aria-pressed', bs[b].dataset.lang===l ? 'true':'false');
+    var c = '', lista = t.cinta.concat(t.cinta, t.cinta, t.cinta);
+    for(var x=0;x<lista.length;x++) c += '<span>'+lista[x]+'</span>';
+    $('cinta').innerHTML = c;
+    $('waDirecto').href = 'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(t.hola);
+    $('aviso').textContent = '';
+    guardar('chepa-lang', l);
+    pintar(false);
+  }
+  document.querySelector('.idioma').onclick = function(e){ if(e.target.dataset.lang) idioma(e.target.dataset.lang); };
+
+  // Recordar los datos del cliente en este celular
+  campos.forEach(function(id){
+    if(id!=='notas') $(id).value = leer('chepa-'+id);
+    $(id).addEventListener('input', function(){
+      this.classList.remove('falta');
+      if(id!=='notas') guardar('chepa-'+id, this.value);
+    });
+  });
+
+  function horaColombia(){
+    try{
+      return new Date().toLocaleString('es-CO',{timeZone:'America/Bogota',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:true});
+    }catch(e){ return ''; }
+  }
+
+  function enviar(){
+    var faltan = false;
+    ['nombre','direccion','telefono'].forEach(function(id){
+      var vacio = !$(id).value.trim();
+      $(id).classList.toggle('falta', vacio);
+      if(vacio) faltan = true;
+    });
+    if(faltan){
+      $('aviso').textContent = T[lang].faltan;
+      $('pedido').scrollIntoView({behavior:'smooth'});
+      return;
+    }
+    $('aviso').textContent = '';
+    var n = cantidad(), notas = $('notas').value.trim();
+    // El mensaje siempre le llega a doña Ruth en español
+    var m = '*NUEVO PEDIDO - GALLETA CHEPA*\n';
+    m += 'Panadería Donde Sharon\n\n';
+    m += '*Cliente / Negocio:* ' + $('nombre').value.trim() + '\n';
+    m += '*Dirección:* ' + $('direccion').value.trim() + '\n';
+    m += '*Teléfono:* ' + $('telefono').value.trim() + '\n';
+    if(notas) m += '*Observaciones:* ' + notas + '\n';
+    m += '\n*Pedido:*\n';
+    m += n + ' x Galleta Chepa 400 g (' + pesos(PRECIO) + ' c/u)\n';
+    m += '\n*TOTAL: ' + pesos(n*PRECIO) + ' COP*\n';
+    var h = horaColombia();
+    if(h) m += '\nFecha: ' + h + ' (hora Colombia)';
+    window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(m), '_blank');
+  }
+  $('enviar').onclick = enviar;
+  $('fijaBtn').onclick = enviar;
+
+  // Foto real del paquete: si existe fotos/galleta-chepa.jpg se muestra sola
+  var foto = $('foto');
+  function conFoto(){ if(foto.naturalWidth>0) $('vitrina').classList.add('con-foto'); }
+  foto.addEventListener('load', conFoto);
+  if(foto.complete) conFoto();
+
+  // Aparición al bajar
+  var ap = document.querySelectorAll('.aparece');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('ya'); io.unobserve(e.target); } });
+    },{threshold:.15});
+    for(var i=0;i<ap.length;i++) io.observe(ap[i]);
+  } else { for(var k=0;k<ap.length;k++) ap[k].classList.add('ya'); }
+
+  var guardado = leer('chepa-lang');
+  idioma(guardado==='en' ? 'en' : 'es');
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
+})();
+</script>
+</body>
+</html>
