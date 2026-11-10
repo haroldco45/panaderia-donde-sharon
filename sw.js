@@ -1,6 +1,6 @@
 // Galleta Chepa - Panadería Donde Sharon
 // Red primero; si no hay señal, usa la copia guardada.
-var CACHE = 'chepa-v1';
+var CACHE = 'chepa-v2';
 var BASE = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', function (e) {

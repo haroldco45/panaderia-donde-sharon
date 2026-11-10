@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Galleta Chepa | Panadería Donde Sharon">
-<meta property="og:description" content="Paquete de 400 g. Pide por WhatsApp con doña Ruth: 322 7249957.">
+<meta property="og:description" content="Paquete de 400 g con 2 galletas a $10.000. Pide por WhatsApp con doña Ruth: 322 7249957.">
 <meta property="og:image" content="https://haroldco45.github.io/panaderia-donde-sharon/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -169,8 +169,8 @@ footer b{color:var(--cafe)}
     <div>
       <div class="origen" data-i18n="origen">Hecha en El Carmen de Bolívar</div>
       <h1><span data-i18n="galleta">Galleta</span>Chepa</h1>
-      <p class="bajada" data-i18n="bajada">La galleta de queso de la Panadería Donde Sharon, en paquete de 400 gramos. Pídela directo con doña Ruth.</p>
-      <div class="precio"><b>$7.000</b><i data-i18n="porPaquete">por paquete de 400 g</i></div>
+      <p class="bajada" data-i18n="bajada">La galleta de queso de la Panadería Donde Sharon, en paquete de 400 gramos con dos galletas. Pídela directo con doña Ruth.</p>
+      <div class="precio"><b>$10.000</b><i data-i18n="porPaquete">por paquete de 400 g · trae 2 galletas</i></div>
       <div class="acciones">
         <a class="btn btn-wa" href="#pedido" data-i18n="hacerPedido">Hacer mi pedido</a>
         <a class="btn btn-linea" href="tel:+573227249957" data-i18n="llamar">Llamar a doña Ruth</a>
@@ -197,7 +197,7 @@ footer b{color:var(--cafe)}
     <div class="aparece">
       <div class="rotulo" data-i18n="rotuloProducto">El producto</div>
       <h2 data-i18n="tituloProducto">Cuatro ingredientes y el horno de siempre</h2>
-      <p data-i18n="textoProducto">En El Carmen de Bolívar la galleta de queso es tradición de casa. La Galleta Chepa de Donde Sharon se hace con lo justo, sin enredos, y llega en paquete de 400 gramos, lista para el tinto, la lonchera o la vitrina de tu tienda.</p>
+      <p data-i18n="textoProducto">En El Carmen de Bolívar la galleta de queso es tradición de casa. La Galleta Chepa de Donde Sharon se hace con lo justo, sin enredos, y llega en paquete de 400 gramos con dos galletas, lista para el tinto, la lonchera o la vitrina de tu tienda.</p>
     </div>
     <ul class="ingredientes aparece">
       <li><span data-i18n="ing1">Harina de trigo</span><small data-i18n="ing1b">fortificada</small></li>
@@ -215,7 +215,7 @@ footer b{color:var(--cafe)}
     <div class="pedido">
       <div class="caja aparece">
         <h3 data-i18n="cantidad">Cantidad</h3>
-        <p class="nota" data-i18n="notaCantidad">Paquetes de Galleta Chepa de 400 g</p>
+        <p class="nota" data-i18n="notaCantidad">Paquetes de Galleta Chepa de 400 g, cada uno trae 2 galletas</p>
         <div class="contador">
           <button type="button" id="menos" aria-label="Quitar un paquete">&minus;</button>
           <input type="number" id="cant" min="1" max="999" value="1" inputmode="numeric" aria-label="Cantidad de paquetes">
@@ -227,7 +227,7 @@ footer b{color:var(--cafe)}
           <button type="button" data-n="12">12</button>
           <button type="button" data-n="24">24</button>
         </div>
-        <div class="total"><span data-i18n="total">Total</span><b id="total">$7.000</b></div>
+        <div class="total"><span data-i18n="total">Total</span><b id="total">$10.000</b></div>
         <div class="detalle" id="detalle"></div>
       </div>
 
@@ -275,27 +275,27 @@ footer b{color:var(--cafe)}
 
 <div class="fija">
   <div class="wrap">
-    <div><small id="fijaCant"></small><b id="fijaTotal">$7.000</b></div>
+    <div><small id="fijaCant"></small><b id="fijaTotal">$10.000</b></div>
     <button type="button" class="btn btn-wa" id="fijaBtn" data-i18n="pedir">Pedir por WhatsApp</button>
   </div>
 </div>
 
 <script>
 (function(){
-  var PRECIO = 7000;
+  var PRECIO = 10000;
   var WHATSAPP = '573227249957';   // Celular de doña Ruth: 322 724 9957
   var lang = 'es';
 
   var T = {
     es:{
       origen:'Hecha en El Carmen de Bolívar', galleta:'Galleta',
-      bajada:'La galleta de queso de la Panadería Donde Sharon, en paquete de 400 gramos. Pídela directo con doña Ruth.',
-      porPaquete:'por paquete de 400 g', hacerPedido:'Hacer mi pedido', llamar:'Llamar a doña Ruth',
+      bajada:'La galleta de queso de la Panadería Donde Sharon, en paquete de 400 gramos con dos galletas. Pídela directo con doña Ruth.',
+      porPaquete:'por paquete de 400 g · trae 2 galletas', hacerPedido:'Hacer mi pedido', llamar:'Llamar a doña Ruth',
       rotuloProducto:'El producto', tituloProducto:'Cuatro ingredientes y el horno de siempre',
-      textoProducto:'En El Carmen de Bolívar la galleta de queso es tradición de casa. La Galleta Chepa de Donde Sharon se hace con lo justo, sin enredos, y llega en paquete de 400 gramos, lista para el tinto, la lonchera o la vitrina de tu tienda.',
+      textoProducto:'En El Carmen de Bolívar la galleta de queso es tradición de casa. La Galleta Chepa de Donde Sharon se hace con lo justo, sin enredos, y llega en paquete de 400 gramos con dos galletas, lista para el tinto, la lonchera o la vitrina de tu tienda.',
       ing1:'Harina de trigo', ing1b:'fortificada', ing2:'Queso', ing2b:'leche en polvo', ing3:'Azúcar', ing4:'Agua',
       rotuloPedido:'Tu pedido', tituloPedido:'¿Cuántos paquetes te llevo?',
-      cantidad:'Cantidad', notaCantidad:'Paquetes de Galleta Chepa de 400 g', total:'Total',
+      cantidad:'Cantidad', notaCantidad:'Paquetes de Galleta Chepa de 400 g, cada uno trae 2 galletas', total:'Total',
       tusDatos:'Tus datos', notaDatos:'Para que doña Ruth sepa a quién y dónde entregar.',
       lNombre:'Nombre o negocio', lDireccion:'Dirección o barrio', lTelefono:'Teléfono', lNotas:'Observaciones (opcional)',
       phNombre:'Tienda El Progreso / Juan Pérez', phDireccion:'Calle 20 # 15-30', phNotas:'Entregar en la mañana, llevo cambio de 50 mil',
@@ -308,13 +308,13 @@ footer b{color:var(--cafe)}
     },
     en:{
       origen:'Made in El Carmen de Bolívar', galleta:'Galleta',
-      bajada:'The cheese cookie from Panadería Donde Sharon, in a 400-gram pack. Order it straight from Doña Ruth.',
-      porPaquete:'per 400 g pack', hacerPedido:'Place my order', llamar:'Call Doña Ruth',
+      bajada:'The cheese cookie from Panadería Donde Sharon, in a 400-gram pack with two cookies. Order it straight from Doña Ruth.',
+      porPaquete:'per 400 g pack · 2 cookies inside', hacerPedido:'Place my order', llamar:'Call Doña Ruth',
       rotuloProducto:'The product', tituloProducto:'Four ingredients and the same old oven',
-      textoProducto:'In El Carmen de Bolívar the cheese cookie is a household tradition. Galleta Chepa from Donde Sharon is made with just what it needs and comes in a 400-gram pack, ready for coffee, the lunchbox or your shop counter.',
+      textoProducto:'In El Carmen de Bolívar the cheese cookie is a household tradition. Galleta Chepa from Donde Sharon is made with just what it needs and comes in a 400-gram pack with two cookies, ready for coffee, the lunchbox or your shop counter.',
       ing1:'Wheat flour', ing1b:'fortified', ing2:'Cheese', ing2b:'powdered milk', ing3:'Sugar', ing4:'Water',
       rotuloPedido:'Your order', tituloPedido:'How many packs shall I bring?',
-      cantidad:'Quantity', notaCantidad:'400 g packs of Galleta Chepa', total:'Total',
+      cantidad:'Quantity', notaCantidad:'400 g packs of Galleta Chepa, 2 cookies in each', total:'Total',
       tusDatos:'Your details', notaDatos:'So Doña Ruth knows who and where to deliver.',
       lNombre:'Name or business', lDireccion:'Address or neighborhood', lTelefono:'Phone', lNotas:'Notes (optional)',
       phNombre:'El Progreso store / Juan Pérez', phDireccion:'Calle 20 # 15-30', phNotas:'Deliver in the morning',
@@ -418,7 +418,7 @@ footer b{color:var(--cafe)}
     m += '*Teléfono:* ' + $('telefono').value.trim() + '\n';
     if(notas) m += '*Observaciones:* ' + notas + '\n';
     m += '\n*Pedido:*\n';
-    m += n + ' x Galleta Chepa 400 g (' + pesos(PRECIO) + ' c/u)\n';
+    m += n + ' x paquete Galleta Chepa 400 g, 2 galletas (' + pesos(PRECIO) + ' c/u)\n';
     m += '\n*TOTAL: ' + pesos(n*PRECIO) + ' COP*\n';
     var h = horaColombia();
     if(h) m += '\nFecha: ' + h + ' (hora Colombia)';
