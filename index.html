@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos | Panadería Donde Sharon</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bakery: {
+                            50: '#fdf8f6',
+                            100: '#fbeee6',
+                            500: '#d94f2b',
+                            600: '#b83b1a',
+                            700: '#962e12',
+                            900: '#691d09',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-bakery-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Notificación emergente personalizada (reemplazo de alert) -->
+    <div id="custom-toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-transform duration-300 ease-in-out bg-white border-l-4 border-bakery-500 shadow-xl rounded-lg p-4 flex items-center space-x-3 max-w-sm">
+        <div class="text-bakery-500 text-xl" id="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <div>
+            <h4 class="font-bold text-sm text-gray-900" id="toast-title">Aviso</h4>
+            <p class="text-xs text-gray-600" id="toast-msg">Mensaje aquí</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-bakery-700 via-bakery-600 to-bakery-500 text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white text-bakery-600 p-2.5 rounded-full shadow-md">
+                    <i class="fa-solid fa-bread-slice text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-serif text-2xl sm:text-3xl font-bold tracking-wide">Panadería Donde Sharon</h1>
+                    <p class="text-xs sm:text-sm text-bakery-100 font-light flex items-center gap-1.5 mt-0.5">
+                        <i class="fa-solid fa-store"></i> Calidad y tradición artesanal
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Vendedora Contact Info Badge -->
+            <div class="bg-black/20 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 flex items-center gap-3 shadow-inner">
+                <div class="relative">
+                    <div class="w-10 h-10 rounded-full bg-white text-bakery-600 font-bold flex items-center justify-center text-lg shadow">
+                        R
+                    </div>
+                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-bakery-700 rounded-full"></span>
+                </div>
+                <div>
+                    <span class="text-xs text-bakery-100 block uppercase tracking-wider font-medium">Asesor Comercial</span>
+                    <span class="font-semibold text-sm sm:text-base flex items-center gap-1.5">
+                        Ruth <a href="https://wa.me/573227249957" target="_blank" class="text-green-300 hover:text-white transition-colors text-xs bg-green-600/60 px-2 py-0.5 rounded-full"><i class="fa-brands fa-whatsapp"></i> 322 7249957</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-grow w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Catálogo de Productos (2 columnas en LG) -->
+        <div class="lg:col-span-2 space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-bakery-100">
+                <div>
+                    <h2 class="text-xl font-bold font-serif text-gray-900">Catálogo de Productos</h2>
+                    <p class="text-xs text-gray-500">Selecciona la cantidad de cada producto que deseas pedir</p>
+                </div>
+                <!-- Barra de búsqueda / filtro rápido -->
+                <div class="w-full sm:w-auto relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="search-input" placeholder="Buscar producto..." 
+                           class="w-full sm:w-64 pl-9 pr-4 py-2 bg-bakery-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-bakery-500 transition-all">
+                </div>
+            </div>
+
+            <!-- Grid de Tarjetas de Productos -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <!-- Se inyecta dinámicamente vía JavaScript -->
+            </div>
+        </div>
+
+        <!-- Panel de Carrito / Detalle de Pedido (1 columna en LG, fija/sticky) -->
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-2xl shadow-lg border border-bakery-100 sticky top-24 overflow-hidden flex flex-col">
+                <!-- Cabecera del Carrito -->
+                <div class="bg-bakery-500 text-white p-4 flex justify-between items-center">
+                    <h3 class="font-serif font-bold text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping"></i> Tu Pedido Actual
+                    </h3>
+                    <span id="cart-counter" class="bg-white text-bakery-600 text-xs font-bold px-2.5 py-1 rounded-full shadow">0 items</span>
+                </div>
+
+                <!-- Lista de Ítems en el Carrito -->
+                <div id="cart-items" class="p-4 max-h-64 overflow-y-auto divide-y divide-gray-100 flex-grow">
+                    <div class="text-center py-8 text-gray-400">
+                        <i class="fa-solid fa-basket-shopping text-3xl mb-2 block"></i>
+                        <p class="text-sm">Tu carrito está vacío.<br>Agrega productos del catálogo.</p>
+                    </div>
+                </div>
+
+                <!-- Formulario de Datos del Cliente -->
+                <div class="p-4 bg-bakery-50 border-t border-gray-100 space-y-3">
+                    <h4 class="font-semibold text-xs uppercase tracking-wider text-gray-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-user-pen text-bakery-500"></i> Datos de Envío / Negocio
+                    </h4>
+                    
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Nombre del Negocio o Cliente *</label>
+                        <input type="text" id="client-name" placeholder="Ej. Tienda El Progreso / Juan Pérez" 
+                               class="w-full px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-bakery-500">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Dirección / Barrio *</label>
+                            <input type="text" id="client-address" placeholder="Ej. Calle 20 # 15-30" 
+                                   class="w-full px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-bakery-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Teléfono de Contacto *</label>
+                            <input type="tel" id="client-phone" placeholder="Ej. 3001234567" 
+                                   class="w-full px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-bakery-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Observaciones / Notas adicionales</label>
+                        <textarea id="client-notes" rows="2" placeholder="Ej. Entregar en la mañana, cambio para billete de 50mil..." 
+                                  class="w-full px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-bakery-500 resize-none"></textarea>
+                    </div>
+                </div>
+
+                <!-- Totales y Botón de Envío -->
+                <div class="p-4 bg-white border-t border-gray-100 space-y-3">
+                    <div class="flex justify-between items-center text-lg font-bold text-gray-900">
+                        <span>Total Pedido:</span>
+                        <span id="cart-total" class="text-bakery-600">$0 COP</span>
+                    </div>
+
+                    <button onclick="sendWhatsAppOrder()" 
+                            class="w-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 transform active:scale-98">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Enviar Pedido a Ruth
+                    </button>
+                    
+                    <button onclick="clearCart()" 
+                            class="w-full text-xs text-gray-400 hover:text-red-500 transition-colors text-center py-1">
+                        Vaciar carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer con Derechos de Autor -->
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-bread-slice text-bakery-500"></i>
+                <span class="font-semibold text-gray-700">Panadería Donde Sharon</span> - El Carmen de Bolívar
+            </div>
+            <div>
+                Derechos de autor reservados © Vibras Positivas HM
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de lógica de la aplicación -->
+    <script>
+        // Base de datos de productos (incluyendo la Galleta Chepa de la imagen)
+        const products = [
+            {
+                id: 1,
+                name: "Galleta Chepa - 400g",
+                category: "Galletas y Tradicionales",
+                price: 7000,
+                unit: "paquete",
+                image: "https://placehold.co/400x300/d94f2b/ffffff?text=Galleta+Chepa+400g",
+                description: "Deliciosa galleta artesanal de 400g elaborada con harina de trigo fortificada, azúcar, agua y queso (leche en polvo). Tradición y sabor único.",
+                badge: "¡Estrella!"
+            },
+            {
+                id: 2,
+                name: "Pan Tajado Tradicional",
+                category: "Panes",
+                price: 5500,
+                unit: "unidad",
+                image: "https://placehold.co/400x300/fbeee6/d94f2b?text=Pan+Tajado",
+                description: "Pan suave y fresco, ideal para los desayunos y sándwiches de toda la familia.",
+                badge: "Popular"
+            },
+            {
+                id: 3,
+                name: "Rollo de Queso",
+                category: "Especiales",
+                price: 4500,
+                unit: "unidad",
+                image: "https://placehold.co/400x300/fbeee6/d94f2b?text=Rollo+de+Queso",
+                description: "Exquisito rollo horneado relleno con auténtico queso fresco de la región.",
+                badge: "Recién horneado"
+            },
+            {
+                id: 4,
+                name: "Galletas de Coco",
+                category: "Galletas y Tradicionales",
+                price: 6000,
+                unit: "paquete",
+                image: "https://placehold.co/400x300/fbeee6/d94f2b?text=Galletas+de+Coco",
+                description: "Crujientes galletas artesanales con trocitos reales de coco tostado.",
+                badge: ""
+            },
+            {
+                id: 5,
+                name: "Pan de Bono (Paquete x 5)",
+                category: "Especiales",
+                price: 8000,
+                unit: "paquete",
+                image: "https://placehold.co/400x300/fbeee6/d94f2b?text=Pan+de+Bono",
+                description: "Calentitos, suaves por dentro y con el punto perfecto de queso.",
+                badge: "Favorito"
+            },
+            {
+                id: 6,
+                name: "Roscones de Arequipe",
+                category: "Galletas y Tradicionales",
+                price: 3500,
+                unit: "unidad",
+                image: "https://placehold.co/400x300/fbeee6/d94f2b?text=Roscon+Arequipe",
+                description: "Suave masa de roscón horneada y generosamente rellena de arequipe artesanal.",
+                badge: ""
+            }
+        ];
+
+        // Estado del Carrito: { productId: quantity }
+        let cart = {};
+
+        // Inicializar la aplicación al cargar la ventana
+        window.onload = function() {
+            renderProducts(products);
+            setupSearch();
+        };
+
+        // Renderizar los productos en el grid
+        function renderProducts(itemsToRender) {
+            const grid = document.getElementById('products-grid');
+            if (itemsToRender.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white rounded-2xl border border-gray-100">
+                        <i class="fa-solid fa-face-sad-tear text-4xl text-gray-300 mb-2"></i>
+                        <p class="text-gray-500 font-medium">No se encontraron productos.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = itemsToRender.map(product => {
+                const currentQty = cart[product.id] || 0;
+                return `
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col justify-between transition-all hover:shadow-md">
+                        <div class="relative">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-44 object-cover" onerror="this.src='https://placehold.co/400x300/fbeee6/d94f2b?text=Panaderia+Sharon'">
+                            ${product.badge ? `<span class="absolute top-3 left-3 bg-bakery-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">${product.badge}</span>` : ''}
+                            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-bakery-700 font-bold text-xs px-2.5 py-1 rounded-lg shadow">
+                                $${product.price.toLocaleString()} COP
+                            </span>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow justify-between">
+                            <div>
+                                <span class="text-xs text-bakery-600 font-semibold uppercase tracking-wider">${product.category}</span>
+                                <h3 class="font-bold text-gray-900 text-base mt-0.5">${product.name}</h3>
+                                <p class="text-xs text-gray-500 mt-1 line-clamp-2">${product.description}</p>
+                            </div>
+                            
+                            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+                                <span class="text-xs text-gray-400 font-medium">Por ${product.unit}</span>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="updateQuantity(${product.id}, -1)" 
+                                            class="w-8 h-8 rounded-full bg-bakery-50 hover:bg-bakery-100 text-bakery-700 font-bold flex items-center justify-center transition-colors shadow-sm">
+                                        <i class="fa-solid fa-minus text-xs"></i>
+                                    </button>
+                                    <span id="qty-${product.id}" class="w-6 text-center font-bold text-sm text-gray-800">${currentQty}</span>
+                                    <button onclick="updateQuantity(${product.id}, 1)" 
+                                            class="w-8 h-8 rounded-full bg-bakery-500 hover:bg-bakery-600 text-white font-bold flex items-center justify-center transition-colors shadow-sm">
+                                        <i class="fa-solid fa-plus text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Búsqueda dinámica
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = products.filter(p => 
+                    p.name.toLowerCase().includes(term) || 
+                    p.category.toLowerCase().includes(term) ||
+                    p.description.toLowerCase().includes(term)
+                );
+                renderProducts(filtered);
+            });
+        }
+
+        // Actualizar cantidades en el carrito
+        function updateQuantity(productId, change) {
+            if (!cart[productId]) {
+                cart[productId] = 0;
+            }
+            cart[productId] += change;
+            
+            if (cart[productId] <= 0) {
+                delete cart[productId];
+            }
+            
+            // Actualizar interfaz del contador en tarjeta específica si existe
+            const qtySpan = document.getElementById(`qty-${productId}`);
+            if (qtySpan) {
+                qtySpan.textContent = cart[productId] || 0;
+            }
+
+            updateCartUI();
+        }
+
+        // Modificar directamente desde el carrito
+        function setCartQuantity(productId, qty) {
+            qty = parseInt(qty);
+            if (isNaN(qty) || qty <= 0) {
+                delete cart[productId];
+            } else {
+                cart[productId] = qty;
+            }
+            const qtySpan = document.getElementById(`qty-${productId}`);
+            if (qtySpan) {
+                qtySpan.textContent = cart[productId] || 0;
+            }
+            updateCartUI();
+        }
+
+        // Actualizar la sección lateral del carrito y totales
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartCounter = document.getElementById('cart-counter');
+            const cartTotal = document.getElementById('cart-total');
+
+            const productIds = Object.keys(cart);
+            
+            if (productIds.length === 0) {
+                cartCounter.textContent = `0 items`;
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-8 text-gray-400">
+                        <i class="fa-solid fa-basket-shopping text-3xl mb-2 block"></i>
+                        <p class="text-sm">Tu carrito está vacío.<br>Agrega productos del catálogo.</p>
+                    </div>
+                `;
+                cartTotal.textContent = `$0 COP`;
+                return;
+            }
+
+            let totalItems = 0;
+            let totalPrice = 0;
+
+            let html = '';
+            productIds.forEach(id => {
+                const product = products.find(p => p.id == id);
+                const qty = cart[id];
+                const subtotal = product.price * qty;
+                totalItems += qty;
+                totalPrice += subtotal;
+
+                html += `
+                    <div class="py-3 flex items-center justify-between gap-2">
+                        <div class="flex-grow">
+                            <h5 class="font-semibold text-xs text-gray-900">${product.name}</h5>
+                            <span class="text-xs text-gray-400">$${product.price.toLocaleString()} c/u</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" min="1" value="${qty}" onchange="setCartQuantity(${product.id}, this.value)"
+                                   class="w-12 text-center text-xs py-1 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-bakery-500">
+                            <span class="text-xs font-bold text-bakery-700 w-16 text-right">$${subtotal.toLocaleString()}</span>
+                            <button onclick="setCartQuantity(${product.id}, 0)" class="text-gray-300 hover:text-red-500 text-xs px-1">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = html;
+            cartCounter.textContent = `${totalItems} ${totalItems === 1 ? 'item' : 'items'}`;
+            cartTotal.textContent = `$${totalPrice.toLocaleString()} COP`;
+        }
+
+        // Vaciar carrito
+        function clearCart() {
+            cart = {};
+            products.forEach(p => {
+                const qtySpan = document.getElementById(`qty-${p.id}`);
+                if (qtySpan) qtySpan.textContent = '0';
+            });
+            updateCartUI();
+            showToast('Carrito vaciado', 'Se han removido todos los productos.', 'fa-solid fa-trash-can');
+        }
+
+        // Enviar pedido por WhatsApp a Ruth (3227249957)
+        function sendWhatsAppOrder() {
+            const clientName = document.getElementById('client-name').value.trim();
+            const clientAddress = document.getElementById('client-address').value.trim();
+            const clientPhone = document.getElementById('client-phone').value.trim();
+            const clientNotes = document.getElementById('client-notes').value.trim();
+
+            if (!clientName || !clientAddress || !clientPhone) {
+                showToast('Datos incompletos', 'Por favor completa tu nombre, dirección y teléfono para el envío.', 'fa-solid fa-triangle-exclamation');
+                return;
+            }
+
+            const productIds = Object.keys(cart);
+            if (productIds.length === 0) {
+                showToast('Carrito vacío', 'Agrega al menos un producto antes de enviar tu pedido.', 'fa-solid fa-triangle-exclamation');
+                return;
+            }
+
+            let message = `🥖 *NUEVO PEDIDO - PANADERÍA DONDE SHARON* 🥖\n\n`;
+            message += `👤 *Cliente / Negocio:* ${clientName}\n`;
+            message += `📍 *Dirección:* ${clientAddress}\n`;
+            message += `📞 *Teléfono:* ${clientPhone}\n`;
+            if (clientNotes) {
+                message += `📝 *Observaciones:* ${clientNotes}\n`;
+            }
+            message += `\n🛒 *DETALLE DEL PEDIDO:*\n`;
+
+            let totalPrice = 0;
+            productIds.forEach(id => {
+                const product = products.find(p => p.id == id);
+                const qty = cart[id];
+                const subtotal = product.price * qty;
+                totalPrice += subtotal;
+                message += `• ${qty}x ${product.name} - $${subtotal.toLocaleString()} COP\n`;
+            });
+
+            message += `\n💰 *VALOR TOTAL:* *$${totalPrice.toLocaleString()} COP*\n\n`;
+            message += `_Enviado a través de la App de Pedidos_.`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/573227249957?text=${encodedMessage}`;
+
+            showToast('¡Pedido listo!', 'Abriendo WhatsApp para enviar el pedido a Ruth...', 'fa-solid fa-circle-check');
+            
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 800);
+        }
+
+        // Sistema de notificaciones toast personalizado (sin alert)
+        function showToast(title, msg, iconClass = 'fa-solid fa-circle-check') {
+            const toast = document.getElementById('custom-toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-msg').textContent = msg;
+            document.getElementById('toast-icon').innerHTML = `<i class="${iconClass}"></i>`;
+
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
