@@ -10,6 +10,6 @@ App de pedidos por WhatsApp para que doña Ruth venda la Galleta Chepa (paquete 
 
 - **Precio:** en `index.html`, la línea `var PRECIO = 10000;` (y el `$10.000` de la portada).
 - **Celular:** en `index.html`, la línea `var WHATSAPP = '573227249957';` y los enlaces `tel:`.
-- **Foto real del paquete:** subir la foto como `fotos/galleta-chepa.jpg`. La app la muestra sola en la portada; mientras no exista, muestra la etiqueta dibujada.
+- **Foto:** `fotos/galleta-chepa.jpg` es la foto de la portada. Para cambiarla, subir otra con el mismo nombre.
 
 Derechos de autor reservados © Vibras Positivas HM
